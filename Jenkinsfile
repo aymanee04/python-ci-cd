@@ -13,6 +13,16 @@ pipeline {
             }
         }
 
+        stage('Start Application') {
+            steps {
+                sh '''
+                    nohup ./venv/bin/python app/app.py > flask.log 2>&1 &
+                    sleep 5
+                    curl -f http://localhost:5000/api/health
+                '''
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 sh '''
