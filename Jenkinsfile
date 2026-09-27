@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'TON_URL_GITHUB'
+                git 'https://github.com/aymanee04/python-ci-cd.git'
             }
         }
 
