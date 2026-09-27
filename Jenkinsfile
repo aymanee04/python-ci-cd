@@ -36,5 +36,20 @@ pipeline {
                 }
             }
         }
+        stage('API Tests - Postman') {
+    steps {
+        sh '''
+            newman run postman/python-ci-cd.postman_collection.json \
+                --reporters cli,junit \
+                --reporter-junit-export newman-results.xml
+        '''
+    }
+
+    post {
+        always {
+            junit 'newman-results.xml'
+        }
+    }
+}
     }
 }
